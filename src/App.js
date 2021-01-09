@@ -1,6 +1,5 @@
-import React from 'react'
-import { useQuery } from '@apollo/react-hooks'
-import { gql } from 'apollo-boost'
+import React, { useEffect } from 'react'
+import { useQuery, gql } from '@apollo/client'
 
 const GET_POSTS = gql`
 query getPosts {
@@ -18,10 +17,15 @@ query getPosts {
 function App() {
     const { loading, error, data } = useQuery(GET_POSTS)
 
-    if (loading) return "Loading..."
-    if (error) return `Error! ${error.message}`
+    useEffect(() => {
+        console.log('data', data)
+        console.log('laoding', loading)
+    }, [loading, data])
 
-return (
+    if (loading) return "Loading..."
+    else if (error) return `Error! ${error.message}`
+
+else return (
 <>
     {
         data.posts.map(post => (
