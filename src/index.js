@@ -4,10 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client'
+import {ApolloClient, InMemoryCache, ApolloProvider, createHttpLink} from '@apollo/client'
+
+const link = createHttpLink({
+  uri: 'http://localhost:4000/'
+})
 
 const client = new ApolloClient({
-  url: "http://localhost:4000",
+  link: link,
   cache: new InMemoryCache()
 })
 
